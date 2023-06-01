@@ -113,9 +113,14 @@ Acompanhe as leituras de temperatura e umidade no Node-RED e utilize os recursos
 ### Documentações auxiliares
 
 NodeMCU: https://nodemcu.readthedocs.io/en/release/
+
 Core-doc ESP8266: https://arduino-esp8266.readthedocs.io/en/latest/
+
 Arduino IDE: https://docs.arduino.cc/software/ide-v1/tutorials/arduino-ide-v1-basics
+
 Node-RED: https://nodered.org/docs/
+
 MQTT info: https://mqtt.org/
+
 MQTT broker (Mosquitto): https://mosquitto.org/documentation/
 
