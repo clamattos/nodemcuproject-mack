@@ -82,7 +82,7 @@ Kit com 40 peças.
 5. Atuador LED Difuso Vermelho
 
 LED difuso de cor vermelha para indicar ação relacionada à temperatura.
-Utilizado para sinalização quando a temperatura está na faixa ideal.
+Utilizado para sinalização quando a temperatura está na faixa não ideal.
 
 ## Como Utilizar o Projeto
 
