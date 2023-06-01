@@ -23,7 +23,7 @@ O sistema utiliza o NodeMCU para coletar dados de temperatura e umidade por meio
 
 Em conjunto com o NodeMCU, o Node-RED é utilizado para criar fluxos de automação e integração visualmente. O Node-RED pode se inscrever no tópico MQTT onde as leituras de temperatura e umidade são publicadas pelo NodeMCU. Em seguida, o Node-RED pode processar esses dados e executar ações, como armazenar em um banco de dados, exibir em um painel de controle ou enviar notificações.
 
-## Implementação
+## Implementação e descrição do ambiente de desenvolvimento
 
 A implementação do projeto envolve a programação do NodeMCU para coletar dados dos sensores de temperatura e umidade. Todas as vezes que a temperatura estiver fora de uma faixa específica, um LED deve acender para indicar condições inadequadas de temperatura. Os dados de umidade são apenas armazenados para análise posterior.
 
@@ -39,6 +39,50 @@ A implementação do projeto envolve a programação do NodeMCU para coletar dad
 - Crie um fluxo no Node-RED com um nó MQTT Subscriber para se inscrever no tópico MQTT onde as leituras de temperatura e umidade são publicadas.
 - Adicione nós para processar os dados, como nós de armazenamento em banco de dados, visualização em um painel de controle ou envio de notificações.
 - Conecte os nós de forma adequada para criar o fluxo de automação e integração desejado.
+
+### Arduino IDE:
+
+O ambiente de desenvolvimento conta com o uso de Arduino IDE e integração com Node-RED, como comentado. Sobre a IDE: 
+
+- Arduino IDE: É a própria interface de desenvolvimento integrada (IDE) fornecida pela Arduino. É um software que permite escrever, compilar e carregar código nos dispositivos Arduino. Ele oferece uma interface amigável e simplificada para facilitar a programação.
+- Editor de código: A Arduino IDE possui um editor de código onde você pode escrever seu programa. É um editor de texto básico.
+- Gerenciador de bibliotecas: A Arduino IDE possui um gerenciador de bibliotecas embutido que permite buscar, instalar e atualizar bibliotecas adicionais.
+- Compilador: Após escrever o código, você pode compilar o programa na Arduino IDE para verificar se não há erros de sintaxe ou outros problemas. O compilador converte o código em linguagem de máquina compreensível pelo microcontrolador.
+
+### Hardware Utilizado:
+
+1. NodeMCU ESP8266 ESP-12E
+
+Placa de desenvolvimento baseada no microcontrolador ESP8266 com conectividade Wi-Fi integrada.
+Possui GPIOs para conexão de periféricos externos.
+Compatível com a plataforma Arduino IDE e linguagem Lua.
+Tensão de operação: 4,5V - 9VDC.
+Dimensões: 25mm(L) x 19mm(A) x 49mm(C).
+
+2. Sensor de Umidade e Temperatura DHT11
+
+Sensor de umidade e temperatura para integração com microcontroladores.
+Faixa de medição de temperatura: 0º a 50ºC.
+Faixa de medição de umidade: 20% a 80%.
+Precisão de ±2ºC (temperatura) e ±5% (umidade).
+Taxa de amostragem: 1 leitura por segundo.
+
+3. Resistor de 10K
+
+Resistor utilizado para controle de corrente em circuitos eletrônicos.
+Valor: 10.000 ohms.
+
+4. Cabos Jumper Macho-Fêmea
+
+Cabos jumper para conexões temporárias em circuitos eletrônicos.
+Conector macho em uma extremidade e conector fêmea na outra.
+Comprimento: 20cm.
+Kit com 40 peças.
+
+5. Atuador LED Difuso Vermelho
+
+LED difuso de cor verde para indicar ação relacionada à temperatura.
+Utilizado para sinalização quando a temperatura está na faixa ideal.
 
 ## Como Utilizar o Projeto
 
@@ -65,4 +109,13 @@ git clone https://github.com/seu-usuario/nodemcu-node-red-coleta-dados-temperatu
 Acompanhe as leituras de temperatura e umidade no Node-RED e utilize os recursos do Node-RED para processar os dados e realizar ações personalizadas de acordo com suas necessidades.
 
 *OBS. Certifique-se de substituir `seu-usuario` pelo seu nome de usuário do GitHub para que o link do clone do repositório seja correto.
+
+### Documentações auxiliares
+
+NodeMCU: https://nodemcu.readthedocs.io/en/release/
+Core-doc ESP8266: https://arduino-esp8266.readthedocs.io/en/latest/
+Arduino IDE: https://docs.arduino.cc/software/ide-v1/tutorials/arduino-ide-v1-basics
+Node-RED: https://nodered.org/docs/
+MQTT info: https://mqtt.org/
+MQTT broker (Mosquitto): https://mosquitto.org/documentation/
 
