@@ -46,6 +46,7 @@ A implementação do projeto envolve a programação do NodeMCU para coletar dad
 
 ```shell
 git clone https://github.com/seu-usuario/nodemcu-node-red-coleta-dados-temperatura-umidade.git
+```
 
 2. Faça as devidas conexões do sensor de temperatura e umidade ao NodeMCU. Consulte o esquemático fornecido no repositório para obter informações sobre as conexões corretas.
 
