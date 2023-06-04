@@ -84,17 +84,49 @@ Kit com 40 peças.
 LED difuso de cor vermelha para indicar ação relacionada à temperatura.
 Utilizado para sinalização quando a temperatura está na faixa não ideal.
 
+## Pré-requisitos do projeto 
+
+Este projeto utiliza o AWS IoT Core e o DynamoDB para ingestão e persistência de dados. Para subir cada um dos componentes, é necessário ter uma conta AWS. Com uma conta em execução, siga o passo-a-passo: 
+
+Criação de "Thing" no IoT Core:
+
+1. Clique em "Gerenciar" no painel de navegação à esquerda e selecione "Things"
+2. Clique em criar para criar um novo Thing
+3. Insira um nome para o seu Thing
+4. Preencha os detalhes necessários
+6. Adicione um certificado para autenticação do Thing. Escolha criar um novo certificado ou usar um certificado existente e siga as instruções para adicionar o certificado.
+
+Criação de tabela no DynamoDB:
+
+1. Clique em "Criar tabela" para iniciar o processo de criação de uma nova tabela
+2. Insira um nome para a tabela no campo "Nome da tabela"
+3. Defina a chave primária da tabela. A chave primária é usada para identificar exclusivamente cada item na tabela
+4. Especifique o tipo de dado para a chave primária (por exemplo, número, string)
+5. Defina outras configurações da tabela, como capacidade de leitura/gravação provisionada ou capacidade sob demanda
+6. Clique em "Criar tabela" para criar a tabela com as configurações especificadas
+
+Criação de regra de conexão com DynamoDB: 
+
+1. Clique em "Gerenciar" no painel de navegação à esquerda e selecione "Rules" 
+2. Clique em criar uma nova regra
+3. Insira um nome para a sua regra
+4. Na seção "Selecionar ação", clique em adicionar ação
+5. Selecione "Enviar mensagem para DynamoDB" 
+6. Selecione a tabela do DynamoDB onde deseja gravar os dados
+7. Defina a chave primária (partition key)
+8. Mapeie os campos da mensagem MQTT para os atributos da tabela do DynamoDB
+
 ## Como Utilizar o Projeto
 
 1. Clone este repositório em sua máquina local.
 
 ```shell
-git clone https://github.com/seu-usuario/nodemcu-node-red-coleta-dados-temperatura-umidade.git
+git clone https://github.com/clamattos/nodemcu-node-red-coleta-dados-temperatura-umidade.git
 ```
 
-2. Faça as devidas conexões do sensor de temperatura e umidade ao NodeMCU. Consulte o esquemático fornecido no repositório para obter informações sobre as conexões corretas.
+2. Faça as devidas conexões do sensor de temperatura e umidade ao NodeMCU. Consulte o esquemático fornecido no repositório para obter informações sobre as conexões corretas. 
 
-3. Configure as informações de conexão Wi-Fi e do broker MQTT no código do NodeMCU, assim como as configurações de MQTT no fluxo do Node-RED.
+3. Configure um arquivo chamado Secrets.h, em que você deve inserir o seu SSID, WIFI_PASSWORD, THINGNAME, MQTT_HOST, CERTIFICATES.
 
 4. Carregue o código no NodeMCU por meio da porta USB.
 
@@ -106,9 +138,12 @@ git clone https://github.com/seu-usuario/nodemcu-node-red-coleta-dados-temperatu
 
 8. Execute o fluxo no Node-RED para iniciar a coleta de dados, visualização e automação conforme desejado.
 
-Acompanhe as leituras de temperatura e umidade no Node-RED e utilize os recursos do Node-RED para processar os dados e realizar ações personalizadas de acordo com suas necessidades.
+Acompanhe as leituras de temperatura e umidade no IoT Core por meio do seguinte procedimento: 
 
-*OBS. Certifique-se de substituir `seu-usuario` pelo seu nome de usuário do GitHub para que o link do clone do repositório seja correto.
+1. Clique em MQTT Test Client e selecioner Inscrever-se em um tópico 
+2. Coloque o nome do tópico e clique em inscrever-se 
+
+Ao configurar o Node-RED, você também pode acessar o portal de dashboards por: 127.0.0.1:1880/ui
 
 ### Documentações auxiliares
 
@@ -122,5 +157,7 @@ Node-RED: https://nodered.org/docs/
 
 MQTT info: https://mqtt.org/
 
-MQTT broker (Mosquitto): https://mosquitto.org/documentation/
+MQTT broker (IoT Core): https://docs.aws.amazon.com/iot/index.html
+
+DynamoDB: https://docs.aws.amazon.com/dynamodb/index.html
 
