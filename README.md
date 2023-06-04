@@ -17,6 +17,7 @@ O objetivo deste projeto é simular, em pequena escala, como essa implementaçã
 5. NodeMCU-Connection-Final: esquemático principal exportado para imagem (guia para conexões físicas)
 6. Schematic-Connection: conexão esquemática auxiliar
 7. Secrets.h.ino: configurações de endpoints, credenciais de wi-fi e certificados de criptografia
+8. dataflow.json: arquivo com o flow construído no Node-RED
 
 ## Recursos Utilizados
 
@@ -35,31 +36,29 @@ Em conjunto com o NodeMCU, o Node-RED é utilizado para criar fluxos de automaç
 
 ## Implementação e descrição do ambiente de desenvolvimento
 
-A implementação do projeto envolve a programação do NodeMCU para coletar dados dos sensores de temperatura e umidade. Todas as vezes que a temperatura estiver fora de uma faixa específica, um LED deve acender para indicar condições inadequadas de temperatura. Os dados de umidade são apenas armazenados para análise posterior.
+A implementação do projeto envolve a programação do NodeMCU para coletar dados dos sensores de temperatura e umidade. Todas as vezes que a temperatura estiver fora de uma faixa específica, um LED deve acender para indicar condições inadequadas de temperatura. Os dados de umidade são apenas armazenados para análise posterior. Os componentes são: 
 
 ### NodeMCU:
 
-- Configure a conexão Wi-Fi e as informações do broker MQTT no código do NodeMCU.
-- Utilize a biblioteca MQTT (como a PubSubClient) para facilitar a comunicação MQTT.
-- No código, realize a leitura dos dados do sensor de temperatura e umidade e publique as leituras no broker MQTT.
+- Hardware de comunicação
 
 ### Node-RED:
 
-- Instale o Node-RED em seu ambiente de desenvolvimento.
-- Crie um fluxo no Node-RED com um nó MQTT Subscriber para se inscrever no tópico MQTT onde as leituras de temperatura e umidade são publicadas.
-- Adicione nós para processar os dados, como nós de armazenamento em banco de dados, visualização em um painel de controle ou envio de notificações.
-- Conecte os nós de forma adequada para criar o fluxo de automação e integração desejado.
+- Plataforma para subscrição no tópico MQTT e expansão de funcionalidades. Aqui, com uso de dashboards
 
 ### Arduino IDE:
 
-O ambiente de desenvolvimento conta com o uso de Arduino IDE e integração com Node-RED, como comentado. Sobre a IDE: 
+- Ambiente de desenvolvimento e compilação
 
-- Arduino IDE: É a própria interface de desenvolvimento integrada (IDE) fornecida pela Arduino. É um software que permite escrever, compilar e carregar código nos dispositivos Arduino. Ele oferece uma interface amigável e simplificada para facilitar a programação.
-- Editor de código: A Arduino IDE possui um editor de código onde você pode escrever seu programa. É um editor de texto básico.
-- Gerenciador de bibliotecas: A Arduino IDE possui um gerenciador de bibliotecas embutido que permite buscar, instalar e atualizar bibliotecas adicionais.
-- Compilador: Após escrever o código, você pode compilar o programa na Arduino IDE para verificar se não há erros de sintaxe ou outros problemas. O compilador converte o código em linguagem de máquina compreensível pelo microcontrolador.
+### IoT Core: 
 
-### Hardware Utilizado:
+- Plataforma AWS usada como Broker MQTT
+
+### DynamoDB: 
+
+- Banco de dados NoSQL para persistência de informações 
+
+## Hardware Utilizado:
 
 1. NodeMCU ESP8266 ESP-12E
 
@@ -126,31 +125,35 @@ Criação de regra de conexão com DynamoDB:
 7. Defina a chave primária (partition key)
 8. Mapeie os campos da mensagem MQTT para os atributos da tabela do DynamoDB
 
-_OBS. o Endpoint de conexão do IoT core pode ser encontrado em IoT core --> Settings --> Device Data Endpoint 
-_
+_OBS. o Endpoint de conexão do IoT core pode ser encontrado em IoT core --> Settings --> Device Data Endpoint_
+
 ## Como Utilizar o Projeto
 
-1. Clone este repositório em sua máquina local.
+1. Clone este repositório em sua máquina local
 
 ```shell
 git clone https://github.com/clamattos/nodemcuproject-mack.git
 ```
 
-2. Faça as devidas conexões do sensor de temperatura e umidade ao NodeMCU. Consulte o esquemático fornecido no repositório para obter informações sobre as conexões corretas. 
+2. Faça as devidas conexões do sensor de temperatura e umidade ao NodeMCU. Consulte o esquemático fornecido no repositório para obter informações sobre as conexões corretas
 
-3. Configure um arquivo chamado Secrets.h, em que você deve inserir o seu SSID, WIFI_PASSWORD, THINGNAME, MQTT_HOST, CERTIFICATES.
+3. Configure um arquivo chamado Secrets.h, em que você deve inserir o seu SSID, WIFI_PASSWORD, THINGNAME, MQTT_HOST, CERTIFICATES
 
-4. Carregue o código no NodeMCU por meio da porta USB.
+4. Carregue o código no NodeMCU por meio da porta USB
 
-5. Inicie o Node-RED em seu ambiente de desenvolvimento.
+5. Inicie o Node-RED em seu ambiente de desenvolvimento 
 
-6. Importe o fluxo fornecido no repositório para o Node-RED.
+6. Importe o fluxo fornecido no repositório para o Node-RED. Utilize o arquivo em JSON para criar o flow
 
-7. Conecte o NodeMCU à rede Wi-Fi e ao broker MQTT.
+_OBS. É necessário alterar parâmetros relativos aos certificados e endpoint do IoT Core no Node-RED para correta importação_
 
-8. Execute o fluxo no Node-RED para iniciar a coleta de dados, visualização e automação conforme desejado.
+7. Conecte o NodeMCU à rede Wi-Fi e ao broker MQTT
 
-Acompanhe as leituras de temperatura e umidade no IoT Core por meio do seguinte procedimento: 
+8. Verfique a chegada de mensagens pelo IoT Core (em MQTT Test Client)* 
+
+9. Execute o fluxo no Node-RED para iniciar a coleta de dados, visualização e automação conforme desejado
+
+*Acompanhe as leituras de temperatura e umidade no IoT Core por meio do seguinte procedimento: 
 
 1. Clique em MQTT Test Client e selecioner Inscrever-se em um tópico 
 2. Coloque o nome do tópico e clique em inscrever-se 
