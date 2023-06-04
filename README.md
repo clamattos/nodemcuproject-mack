@@ -8,6 +8,16 @@ O NodeMCU é um dispositivo de baixo custo e fácil programação, baseado no mi
 
 O objetivo deste projeto é simular, em pequena escala, como essa implementação pode coletar dados com precisão, demonstrando a viabilidade e o potencial dessa tecnologia para aprimorar a coleta de dados de ambientes externos em escala.
 
+## Relação de arquivos 
+
+1. ArchitectureAWS: diagrama de arquitetura juntando componentes físicos, locais e AWS
+2. Connection-In-PBC: esquema de conexão em PBC auxiliar
+3. Fritzing-Board-NodeMCU-Final-Send: board no Fritzing para ser utilizado dentro da plataforma
+4. IoTProjectCode.ino: código do projeto para envio de métricas, conexão com wi-fi e conexão com broker MQTT
+5. NodeMCU-Connection-Final: esquemático principal exportado para imagem (guia para conexões físicas)
+6. Schematic-Connection: conexão esquemática auxiliar
+7. Secrets.h.ino: configurações de endpoints, credenciais de wi-fi e certificados de criptografia
+
 ## Recursos Utilizados
 
 - Plataforma NodeMCU
@@ -116,6 +126,8 @@ Criação de regra de conexão com DynamoDB:
 7. Defina a chave primária (partition key)
 8. Mapeie os campos da mensagem MQTT para os atributos da tabela do DynamoDB
 
+_OBS. o Endpoint de conexão do IoT core pode ser encontrado em IoT core --> Settings --> Device Data Endpoint 
+_
 ## Como Utilizar o Projeto
 
 1. Clone este repositório em sua máquina local.
