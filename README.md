@@ -133,7 +133,7 @@ _
 1. Clone este repositório em sua máquina local.
 
 ```shell
-git clone https://github.com/clamattos/nodemcu-node-red-coleta-dados-temperatura-umidade.git
+git clone [https://github.com/clamattos/nodemcu-node-red-coleta-dados-temperatura-umidade.git](https://github.com/clamattos/nodemcuproject-mack.git)
 ```
 
 2. Faça as devidas conexões do sensor de temperatura e umidade ao NodeMCU. Consulte o esquemático fornecido no repositório para obter informações sobre as conexões corretas. 
